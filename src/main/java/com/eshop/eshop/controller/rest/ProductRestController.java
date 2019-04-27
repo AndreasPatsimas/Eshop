@@ -21,6 +21,7 @@ public class ProductRestController {
 		this.productService = productService;
 	}
 	
+	
 	@GetMapping(value="products")
 	public List<Product> getProducts(){
 		return productService.findAll();

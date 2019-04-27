@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Products</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container-fluid" style="max-width: 500px;">
+		<div class="jumbotron">
+			<h3>My Product List</h3>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-md-4">
+				<button id="go" type="button" class="btn btn-default">Go</button>
+			</div>
+		</div>
+
+		<br />
+		<div class="row">
+			<b>Products</b>
+			<table class="table">
+				<tr>
+					<td><b>Name</b></td>
+					<td><b>Price</b></td>
+				</tr>
+
+			</table>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$.ajax({
+				url:"http://localhost:1914/eshop/products",
+				dataType:"json",
+				success:function(data){
+					var record = "";
+					for(var i=0; i < data.length; i++){
+						record = "<tr><td>"+data[i].name+"</td><td>"+data[i].price+"</td></tr>";
+						$(".table").append(record);
+					}
+				}
+			});
+		});
+
+		function ap() {
+			
+		}
+		
+		//setInterval("ap()",2000);
+	</script>
+</body>
+</html>
