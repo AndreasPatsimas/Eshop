@@ -1,8 +1,10 @@
 package com.eshop.eshop.model.entity;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -10,11 +12,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
+import javax.persistence.JoinColumn;
 import org.hibernate.validator.constraints.Email;
 
 @Entity
@@ -76,6 +80,13 @@ public class User {
 	@Column(name = "city")
 	private String city;
 
+	@ManyToMany
+	@JoinTable(name = "roleuser", joinColumns = 
+	@JoinColumn(name = "uid"), inverseJoinColumns = @JoinColumn(name = "rid")
+	)
+	private List<Role> roles;
+	
+	
 	public User() {
 		
 	}
@@ -198,6 +209,25 @@ public class User {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+	
+	
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+	
+	public void addRole(Role role) {
+		
+		if (roles == null) {
+			roles = new ArrayList<>();
+		}
+		
+		roles.add(role);
 	}
 
 	@Override
