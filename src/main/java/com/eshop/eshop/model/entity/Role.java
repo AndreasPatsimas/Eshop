@@ -26,7 +26,6 @@ public class Role {
     @Column(name="name")
     private final String name;
     
-
     private Role(Long rid, String name) {
         this.rid = rid;
         this.name = name;

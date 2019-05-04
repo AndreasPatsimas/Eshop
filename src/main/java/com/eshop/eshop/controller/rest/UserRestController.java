@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.eshop.eshop.encryption.CryptoConverter;
+import com.eshop.eshop.model.entity.Role;
 import com.eshop.eshop.model.entity.User;
 import com.eshop.eshop.model.service.UserService;
 
@@ -27,12 +28,14 @@ public class UserRestController {
 		return userService.findAll();
 	}
 	
-	@PostMapping(value = "users")
+	@PostMapping(value = "register")
 	public User registerUser(@RequestBody User user) {
 		
 		user.setUid(0l);
 		
 		user.setPassword(CryptoConverter.encrypt(user.getPassword()));
+		
+		//user.addRole(Role.USER);
 		
 		userService.saveOrUpdateUser(user);
 		

@@ -1,11 +1,8 @@
 package com.eshop.eshop.model.entity;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,7 +13,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -54,19 +50,12 @@ public class User {
 	@NotNull
 	@Email
 	@Column(name = "email")
-	private String email;
-	
-	@NotNull
-	@Column(name = "doc")
-	private Timestamp doc;
+	private String email;	
 	
 	@Column(name = "picture")
 	private byte [] picture;
 	
-	@Column(name = "dob")
-	private Date dob;
-	
-	@NotNull
+	//@NotNull
 	@Column(name = "mobile_phone")
 	private Long mobilePhone;
 	
@@ -85,7 +74,7 @@ public class User {
 	@ManyToMany(fetch=FetchType.LAZY,
 			cascade= {CascadeType.PERSIST, CascadeType.MERGE,
 					 CascadeType.DETACH, CascadeType.REFRESH})
-	@JoinTable(name = "roleuser", joinColumns = 
+	@JoinTable(name = "roleusers", joinColumns = 
 	@JoinColumn(name = "uid"), inverseJoinColumns = @JoinColumn(name = "rid")
 	)
 	private List<Role> roles;
@@ -95,16 +84,14 @@ public class User {
 		
 	}
 
-	public User(String username, String password, String firstname, String lastname, String email, Timestamp doc,
-			byte[] picture, Date dob, Long mobilePhone, String address, int postcode, String city) {
+	public User(String username, String password, String firstname, String lastname, String email,
+			byte[] picture, Long mobilePhone, String address, int postcode, String city) {
 		this.username = username;
 		this.password = password;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.email = email;
-		this.doc = doc;
 		this.picture = picture;
-		this.dob = dob;
 		this.mobilePhone = mobilePhone;
 		this.address = address;
 		this.postcode = postcode;
@@ -159,28 +146,12 @@ public class User {
 		this.email = email;
 	}
 
-	public Timestamp getDoc() {
-		return doc;
-	}
-
-	public void setDoc(Timestamp doc) {
-		this.doc = doc;
-	}
-
 	public byte[] getPicture() {
 		return picture;
 	}
 
 	public void setPicture(byte[] picture) {
 		this.picture = picture;
-	}
-
-	public Date getDob() {
-		return dob;
-	}
-
-	public void setDob(Date dob) {
-		this.dob = dob;
 	}
 
 	public Long getMobilePhone() {
@@ -237,9 +208,10 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [username=" + username + ", password=" + password + ", firstname=" + firstname + ", lastname="
-				+ lastname + ", email=" + email + ", doc=" + doc + ", picture=" + Arrays.toString(picture) + ", dob="
-				+ dob + ", mobilePhone=" + mobilePhone + ", address=" + address + ", postcode=" + postcode + ", city="
-				+ city + "]";
+				+ lastname + ", email=" + email + ", picture=" + Arrays.toString(picture) + ", mobilePhone="
+				+ mobilePhone + ", address=" + address + ", postcode=" + postcode + ", city=" + city + ", roles="
+				+ roles + "]";
 	}
+
 	
 }
