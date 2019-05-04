@@ -7,8 +7,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -80,7 +82,9 @@ public class User {
 	@Column(name = "city")
 	private String city;
 
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.LAZY,
+			cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+					 CascadeType.DETACH, CascadeType.REFRESH})
 	@JoinTable(name = "roleuser", joinColumns = 
 	@JoinColumn(name = "uid"), inverseJoinColumns = @JoinColumn(name = "rid")
 	)
