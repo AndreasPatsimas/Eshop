@@ -4,10 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class HomeController {
+public class ProductController {
 	
-	@RequestMapping("/")
-	public String homePage() {
-		return "register.html";
+	@RequestMapping("/viewProducts")
+	public String products() {
+		return "products.html";
 	}
 }
