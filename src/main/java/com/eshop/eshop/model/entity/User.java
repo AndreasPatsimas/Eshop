@@ -55,7 +55,7 @@ public class User {
 	@Column(name = "picture")
 	private byte [] picture;
 	
-	//@NotNull
+	@NotNull
 	@Column(name = "mobile_phone")
 	private Long mobilePhone;
 	
@@ -71,9 +71,7 @@ public class User {
 	@Column(name = "city")
 	private String city;
 
-	@ManyToMany(fetch=FetchType.LAZY,
-			cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-					 CascadeType.DETACH, CascadeType.REFRESH})
+	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name = "roleusers", joinColumns = 
 	@JoinColumn(name = "uid"), inverseJoinColumns = @JoinColumn(name = "rid")
 	)

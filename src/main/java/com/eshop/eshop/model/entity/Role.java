@@ -20,16 +20,28 @@ public class Role {
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="rid")
-    private final Long rid;
+    private  Long rid;
     
     
     @Column(name="name")
-    private final String name;
+    private  String name;
     
-    private Role(Long rid, String name) {
+    public Role() {
+		
+	}
+    
+
+	public Role(Long rid, String name) {
+		
+		this.rid = rid;
+		this.name = name;
+	}
+
+
+	/*private Role(Long rid, String name) {
         this.rid = rid;
         this.name = name;
-    }
+    }*/
 
     public Long getRid() {
         return rid;
